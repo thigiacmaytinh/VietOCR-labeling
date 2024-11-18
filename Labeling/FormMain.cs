@@ -620,6 +620,12 @@ namespace Labeling
             string[] lines = File.ReadAllLines(filePath);
 
             int totalLine = lines.Length;
+            if (totalLine == 0)
+            {
+                MessageBox.Show("File " + m_labelFile + " rỗng.");
+                return;
+            }
+
             m_totalPage = (int)((float)totalLine / m_numContentPerPage) + 1;
 
 
