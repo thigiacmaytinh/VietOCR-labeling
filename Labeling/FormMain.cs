@@ -475,6 +475,9 @@ namespace Labeling
         {
             m_labels[fileName] = text;
 
+            string labelFilePath = g_folderImagePath + fileName.Replace(".jpg", ".txt");
+            File.WriteAllText(labelFilePath, text);
+
             SaveLabels();
         }
 
