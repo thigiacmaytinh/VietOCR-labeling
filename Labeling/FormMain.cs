@@ -726,7 +726,8 @@ namespace Labeling
 
             m_labels.Remove(fileName);
             File.Delete(g_folderImagePath + fileName);
-            
+            File.Delete(g_folderImagePath + fileName.Replace(".jpg", ".txt"));
+
 
             SaveLabels();
         }
