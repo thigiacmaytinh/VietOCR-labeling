@@ -613,8 +613,9 @@ namespace Labeling
             string filePath = g_folderImagePath + m_labelFile;
             if(!File.Exists(filePath))
             {
-                MessageBox.Show("File " + m_labelFile + " không tồn tại.");
-                return;               
+                //MessageBox.Show("File " + m_labelFile + " không tồn tại.");
+                //return;
+                MergeLabelFiles(g_folderImagePath, m_labelFile);
             }
 
             string[] lines = File.ReadAllLines(filePath);
@@ -650,6 +651,34 @@ namespace Labeling
             }
 
             CheckNextPrevious();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public void MergeLabelFiles(string folderPath, string labelFileName)
+        {
+            string outputFile = Path.Combine(folderPath, labelFileName);
+
+            // Ensure "label.txt" is cleared or created
+            File.WriteAllText(outputFile, "");
+
+            foreach (string filePath in Directory.GetFiles(folderPath, "*.txt"))
+            {
+                string fileName = Path.GetFileName(filePath);
+
+                // Skip "label.txt"
+                if (fileName.Equals(labelFileName, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                // Read content of the file
+                string content = File.ReadAllText(filePath);
+
+                // Format: fileName (replace .txt with .jpg) \t content \n
+                string formattedLine = $"{fileName.Replace(".txt", ".jpg")}\t{content}\n";
+
+                // Append to "label.txt"
+                File.AppendAllText(outputFile, formattedLine);
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
