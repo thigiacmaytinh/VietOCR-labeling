@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
+using System.Collections.Specialized;
 
 namespace Labeling
 {
@@ -67,6 +69,50 @@ namespace Labeling
         {
             this.BackColor = Color.AliceBlue;
             FormMain.GetInstance().SetSelected("");
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (!File.Exists(m_imagePath))
+                return;
+            
+
+            Process.Start("explorer.exe", $"/select,\"{m_imagePath}\"");
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (!File.Exists(m_imagePath))            
+                return;
+            
+
+            if (e.ClickedItem.Name == "btnCopyPath")
+            {
+                Clipboard.SetText(m_imagePath);
+                FormMain.GetInstance().PrintMessage("Copied path to clipboard");
+            }
+            else if (e.ClickedItem.Name == "btnCopyImage")
+            {
+                StringCollection paths = new StringCollection();
+                paths.Add(m_imagePath);
+                Clipboard.SetFileDropList(paths);
+                FormMain.GetInstance().PrintMessage("Copied image to clipboard");
+            }
+            else if (e.ClickedItem.Name == "btnOpenImage")
+            {
+                System.Diagnostics.Process.Start(m_imagePath);
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            this.Focus();
         }
     }
 }

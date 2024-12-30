@@ -28,11 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.lbl_imagePath = new System.Windows.Forms.Label();
             this.chk_select = new System.Windows.Forms.CheckBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnCopyPath = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCopyImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnOpenImage = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -44,6 +50,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // textBox1
             // 
@@ -78,11 +85,41 @@
             this.chk_select.TabIndex = 3;
             this.chk_select.UseVisualStyleBackColor = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnCopyPath,
+            this.btnCopyImage,
+            this.btnOpenImage});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
+            // 
+            // btnCopyPath
+            // 
+            this.btnCopyPath.Name = "btnCopyPath";
+            this.btnCopyPath.Size = new System.Drawing.Size(180, 22);
+            this.btnCopyPath.Text = "Copy path";
+            // 
+            // btnCopyImage
+            // 
+            this.btnCopyImage.Name = "btnCopyImage";
+            this.btnCopyImage.Size = new System.Drawing.Size(180, 22);
+            this.btnCopyImage.Text = "Copy image";
+            // 
+            // btnOpenImage
+            // 
+            this.btnOpenImage.Name = "btnOpenImage";
+            this.btnOpenImage.Size = new System.Drawing.Size(180, 22);
+            this.btnOpenImage.Text = "Open image";
+            // 
             // UClabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.lbl_imagePath);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
@@ -92,6 +129,7 @@
             this.Enter += new System.EventHandler(this.UClabel_Enter);
             this.Leave += new System.EventHandler(this.UClabel_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,5 +140,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbl_imagePath;
         public System.Windows.Forms.CheckBox chk_select;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem btnCopyPath;
+        private System.Windows.Forms.ToolStripMenuItem btnCopyImage;
+        private System.Windows.Forms.ToolStripMenuItem btnOpenImage;
     }
 }

@@ -441,10 +441,9 @@ namespace Labeling
             }
         }
 
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void PrintError(string message)
+        public void PrintError(string message)
         {
             lblMessage.ForeColor = Color.Red;
             lblMessage.Text = message;
@@ -453,7 +452,7 @@ namespace Labeling
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void PrintSuccess(string message)
+        public void PrintSuccess(string message)
         {
             lblMessage.ForeColor = Color.Green;
             lblMessage.Text = message;
@@ -462,7 +461,7 @@ namespace Labeling
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void PrintMessage(string message)
+        public void PrintMessage(string message)
         {
             lblMessage.ForeColor = Color.Black;
             lblMessage.Text = message;
