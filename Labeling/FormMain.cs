@@ -104,7 +104,7 @@ namespace Labeling
 
                 if (recentDirs.Length > 0)
                 {
-                    for (int i = 0; i < recentDirs.Length; i++)
+                    for (int i = recentDirs.Length-1; i > recentDirs.Length-5; i--)
                     {
                         if (!Directory.Exists(recentDirs[i]))
                             continue;
