@@ -736,6 +736,9 @@ namespace Labeling
 
 
             SaveLabels();
+
+            m_numSelected--;
+            btn_delete.Enabled = m_numSelected > 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
