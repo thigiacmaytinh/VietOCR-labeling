@@ -131,5 +131,12 @@ namespace Labeling
         {
             CheckboxChanged?.Invoke(this, chk_select.Checked);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Focus();
+        }
     }
 }
