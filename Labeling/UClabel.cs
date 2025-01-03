@@ -56,10 +56,10 @@ namespace Labeling
         public event EventHandler<bool> CheckboxChanged;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter || (e.Control && e.KeyCode == Keys.S))
+            if (e.KeyCode == Keys.Enter || (e.Control && e.KeyCode == Keys.S))
             {
                 FormMain.GetInstance().CompleteEdit(Path.GetFileName(m_imagePath), textBox1.Text);
             }
