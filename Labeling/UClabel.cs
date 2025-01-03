@@ -38,6 +38,14 @@ namespace Labeling
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        public bool IsChecked
+        {
+            get { return chk_select.Checked; }
+            set { chk_select.Checked = value; }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public string FileName
         {
             get => Path.GetFileName(m_imagePath);
@@ -45,9 +53,13 @@ namespace Labeling
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        public event EventHandler<bool> CheckboxChanged;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if(e.KeyCode == Keys.Enter || (e.Control && e.KeyCode == Keys.S))
             {
                 FormMain.GetInstance().CompleteEdit(Path.GetFileName(m_imagePath), textBox1.Text);
             }
@@ -86,10 +98,6 @@ namespace Labeling
 
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (!File.Exists(m_imagePath))            
-                return;
-            
-
             if (e.ClickedItem.Name == "btnCopyPath")
             {
                 Clipboard.SetText(m_imagePath);
@@ -104,6 +112,8 @@ namespace Labeling
             }
             else if (e.ClickedItem.Name == "btnOpenImage")
             {
+                if (!File.Exists(m_imagePath))
+                    return;
                 System.Diagnostics.Process.Start(m_imagePath);
             }
         }
@@ -113,6 +123,13 @@ namespace Labeling
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             this.Focus();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void chk_select_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckboxChanged?.Invoke(this, chk_select.Checked);
         }
     }
 }

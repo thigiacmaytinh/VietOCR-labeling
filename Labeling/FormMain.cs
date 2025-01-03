@@ -17,7 +17,7 @@ namespace Labeling
     public partial class FormMain : Form
     {
         string g_folderImagePath = "";
-        bool m_isFirstLoading = true;
+
 
 
         int m_lastSearchIndex = 0;
@@ -37,6 +37,8 @@ namespace Labeling
         int m_currentPage = 1;
         int m_numContentPerPage = 50;
         string m_search = "";
+
+        int m_numSelected = 0;
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,9 +122,13 @@ namespace Labeling
         {
             g_folderImagePath = ((RibbonOrbRecentItem)sender).Text;
             if (Directory.Exists(g_folderImagePath))
+            {                
                 LoadImage();
+            }                
             else
+            {
                 MessageBox.Show("Folder không tồn tại");
+            }                
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -244,6 +250,7 @@ namespace Labeling
 
 
                 UClabel uc = new UClabel();
+                uc.CheckboxChanged += UcLabel_CheckboxChanged;
                 uc.ImagePath = filePath;
 
                 if (m_labels.ContainsKey(fileName))
@@ -492,10 +499,10 @@ namespace Labeling
 
         void LoadImage()
         {
-
             this.Enabled = false;
             timerLoading.Start();
-            lblMessage.Text = "Loading file...";            
+            lblMessage.Text = "Loading file...";
+            m_currentPage = 1;
 
             ClearControl();
 
@@ -739,7 +746,6 @@ namespace Labeling
 
             if(index >= 0)
             {
-                btn_delete.Enabled = true;
                 m_fileName = fileName;
 
                 if(m_currentPage > 1)
@@ -750,7 +756,6 @@ namespace Labeling
             }
             else
             {
-                btn_delete.Enabled = false;
                 m_fileName = "";
             }
         }
@@ -893,6 +898,18 @@ namespace Labeling
             {
                 btn_delete.Enabled = true;
             }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void UcLabel_CheckboxChanged(object sender, bool isChecked)
+        {
+            if (isChecked)
+                m_numSelected++;
+            else
+                m_numSelected--;
+
+            btn_delete.Enabled = m_numSelected > 0;
         }
     }
 }

@@ -84,6 +84,7 @@
             this.chk_select.Size = new System.Drawing.Size(35, 50);
             this.chk_select.TabIndex = 3;
             this.chk_select.UseVisualStyleBackColor = true;
+            this.chk_select.CheckedChanged += new System.EventHandler(this.chk_select_CheckedChanged);
             // 
             // contextMenuStrip1
             // 
@@ -92,26 +93,26 @@
             this.btnCopyImage,
             this.btnOpenImage});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(140, 70);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // btnCopyPath
             // 
             this.btnCopyPath.Name = "btnCopyPath";
-            this.btnCopyPath.Size = new System.Drawing.Size(180, 22);
+            this.btnCopyPath.Size = new System.Drawing.Size(139, 22);
             this.btnCopyPath.Text = "Copy path";
             // 
             // btnCopyImage
             // 
             this.btnCopyImage.Name = "btnCopyImage";
-            this.btnCopyImage.Size = new System.Drawing.Size(180, 22);
+            this.btnCopyImage.Size = new System.Drawing.Size(139, 22);
             this.btnCopyImage.Text = "Copy image";
             // 
             // btnOpenImage
             // 
             this.btnOpenImage.Name = "btnOpenImage";
-            this.btnOpenImage.Size = new System.Drawing.Size(180, 22);
+            this.btnOpenImage.Size = new System.Drawing.Size(139, 22);
             this.btnOpenImage.Text = "Open image";
             // 
             // UClabel
