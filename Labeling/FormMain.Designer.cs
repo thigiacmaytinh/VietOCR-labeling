@@ -38,6 +38,7 @@
             this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
             this.txt_search = new System.Windows.Forms.RibbonTextBox();
+            this.chk_selectAll = new System.Windows.Forms.RibbonCheckBox();
             this.btn_search = new System.Windows.Forms.RibbonButton();
             this.btn_imageNoLabel = new System.Windows.Forms.RibbonButton();
             this.btn_delete = new System.Windows.Forms.RibbonButton();
@@ -62,7 +63,6 @@
             this.timerLoading = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.chk_selectAll = new System.Windows.Forms.RibbonCheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -154,6 +154,12 @@
             this.txt_search.TextBoxText = "";
             this.txt_search.TextBoxWidth = 200;
             this.txt_search.TextBoxKeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_search_TextBoxKeyDown);
+            // 
+            // chk_selectAll
+            // 
+            this.chk_selectAll.Name = "chk_selectAll";
+            this.chk_selectAll.Text = "Select all";
+            this.chk_selectAll.CheckBoxCheckChanged += new System.EventHandler(this.chk_selectAll_CheckBoxCheckChanged);
             // 
             // btn_search
             // 
@@ -358,12 +364,6 @@
             this.panel1.Size = new System.Drawing.Size(1221, 510);
             this.panel1.TabIndex = 40;
             this.panel1.WrapContents = false;
-            // 
-            // chk_selectAll
-            // 
-            this.chk_selectAll.Name = "chk_selectAll";
-            this.chk_selectAll.Text = "Select all";
-            this.chk_selectAll.CheckBoxCheckChanged += new System.EventHandler(this.chk_selectAll_CheckBoxCheckChanged);
             // 
             // FormMain
             // 

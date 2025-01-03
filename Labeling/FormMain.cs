@@ -40,6 +40,8 @@ namespace Labeling
 
         int m_numSelected = 0;
 
+        string m_foundImagePath = "";
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -137,41 +139,16 @@ namespace Labeling
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if (m_isTextboxFocused)
-                return;
+            //if (m_isTextboxFocused)
+            //    return;
 
-
-            if (e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Left)
             {
-               
+                GoToPreviousPage();
             }
-            else if (e.KeyCode == Keys.Enter)
+            else if (e.KeyCode == Keys.Right)
             {
-               
-            }
-            else if ((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9))
-            {
-              
-            }
-            else if ((e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9))
-            {
-             
-            }
-            else if (e.KeyCode == Keys.A)
-            {
-               
-            }
-            else if (e.KeyCode == Keys.D)
-            {
-              
-            }
-            else if (e.KeyCode == Keys.Q)
-            {
-                GotoLastNotAnnotated();
-            }
-            else if (e.KeyCode == Keys.E)
-            {
-                GotoNextNotAnnotated();
+                GoToNextPage();
             }
             else if (e.KeyCode == Keys.F)
             {
@@ -179,8 +156,7 @@ namespace Labeling
                 {
                     SearchFile();
                 }
-            }
-            
+            }            
             else
             {
                 e.Handled = false;
@@ -282,8 +258,6 @@ namespace Labeling
 
         private void bgLoadFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.Enabled = true;
-            timerLoading.Stop();
             progressBar1.Value = progressBar1.Minimum;
             lblMessage.Text = "";
 
@@ -297,23 +271,11 @@ namespace Labeling
 
             if(m_search != "")
             {
-                for (int i = 0; i < panel1.Controls.Count; i++)
-                {
-                    UClabel uc = (UClabel)panel1.Controls[i];
-                    if(m_search == "@@##" )
-                    {
-                        if(uc.textBox1.Text == "")
-                        {
-                            uc.textBox1.Focus();
-                            break;
-                        }                        
-                    }
-                    else if (uc.FileName.ToLower().Contains(m_search) || uc.textBox1.Text.ToLower().Contains(m_search))
-                    {
-                        uc.textBox1.Focus();
-                        break;
-                    }
-                }
+                int fileIndex = m_lastSearchIndex - (m_numContentPerPage * (m_currentPage - 1));
+
+                UClabel uc = (UClabel)panel1.Controls[fileIndex];
+                uc.Focus();
+              
                 m_search = "";
             }
         }
@@ -396,6 +358,7 @@ namespace Labeling
                 return;
 
             m_search = txt_search.TextBoxText.ToLower().Trim();
+            m_foundImagePath = "";
 
             if (m_search != m_lastSearch)
                 m_lastSearchIndex = 0;
@@ -414,6 +377,7 @@ namespace Labeling
                 {
                     found = true;
                     m_lastSearchIndex = i;
+                    m_foundImagePath = filename;
                     break;
                 }
             }
@@ -428,7 +392,8 @@ namespace Labeling
                     if (filename.Contains(m_search) || label.Contains(m_search))
                     {
                         found = true;
-                        m_lastSearchIndex = i;                        
+                        m_lastSearchIndex = i;
+                        m_foundImagePath = filename;
                         break;
                     }
                 }
@@ -439,8 +404,9 @@ namespace Labeling
             if (found)
             {
                 int contentPerPage = int.Parse(cb_contentPerPage.SelectedItem.Text);
-                int pageIdx = (int)Math.Ceiling((double)m_lastSearchIndex / contentPerPage);
+                int pageIdx = (int)Math.Ceiling((double)(m_lastSearchIndex + 1) / contentPerPage);
                 m_currentPage = pageIdx;
+                
                 LoadImage();
             }
             else
@@ -501,8 +467,7 @@ namespace Labeling
 
         void LoadImage()
         {
-            this.Enabled = false;
-            timerLoading.Start();
+            //this.Enabled = false;
             lblMessage.Text = "Loading file...";
 
 
