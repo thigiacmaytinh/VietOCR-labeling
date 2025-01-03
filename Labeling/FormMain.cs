@@ -696,17 +696,6 @@ namespace Labeling
 
         public void DeleteLabel(string fileName)
         {
-            if(chk_askBeforeDelete.Checked)
-            {
-                if (MessageBox.Show(fileName, "Bạn có chắc chắn muốn xóa file", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                {
-                    return;
-                }
-            }
-            
-                       
-
-
             List<Control> listControls = panel1.Controls.Cast<Control>().ToList();
 
             for(int i=0; i< panel1.Controls.Count; i++)
@@ -769,6 +758,14 @@ namespace Labeling
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            if (chk_askBeforeDelete.Checked)
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa file", "Warning", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             for (int i = panel1.Controls.Count -1 ; i>=0; i--)
             {
                 UClabel uc = (UClabel)panel1.Controls[i];
