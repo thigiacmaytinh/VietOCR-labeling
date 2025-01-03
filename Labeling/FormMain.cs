@@ -783,6 +783,16 @@ namespace Labeling
 
         private void btn_previous_Click(object sender, EventArgs e)
         {
+            GoToPreviousPage();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void GoToPreviousPage()
+        {
+            if (m_currentPage <= 1)
+                return;
+
             chk_selectAll.Checked = false;
             m_currentPage--;
             panel_paging.Text = String.Format("Page: {0}/{1}", m_currentPage, m_totalPage);
@@ -797,6 +807,16 @@ namespace Labeling
 
         private void btn_next_Click(object sender, EventArgs e)
         {
+            GoToNextPage();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void GoToNextPage()
+        {
+            if (m_currentPage >= m_totalPage)
+                return;
+
             chk_selectAll.Checked = false;
             m_currentPage++;
             panel_paging.Text = String.Format("Page: {0}/{1}", m_currentPage, m_totalPage);
