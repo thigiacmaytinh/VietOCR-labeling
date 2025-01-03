@@ -122,7 +122,8 @@ namespace Labeling
         {
             g_folderImagePath = ((RibbonOrbRecentItem)sender).Text;
             if (Directory.Exists(g_folderImagePath))
-            {                
+            {
+                m_currentPage = 1;
                 LoadImage();
             }                
             else
@@ -502,7 +503,7 @@ namespace Labeling
             this.Enabled = false;
             timerLoading.Start();
             lblMessage.Text = "Loading file...";
-            m_currentPage = 1;
+
 
             ClearControl();
 
