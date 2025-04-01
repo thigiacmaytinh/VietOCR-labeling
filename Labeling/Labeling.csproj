@@ -74,6 +74,9 @@
     <Compile Include="..\lib\TGMTcs\src\TGMTfile.cs">
       <Link>TGMTcs\TGMTfile.cs</Link>
     </Compile>
+    <Compile Include="..\lib\TGMTcs\src\TGMTform.cs">
+      <Link>TGMTcs\TGMTform.cs</Link>
+    </Compile>
     <Compile Include="..\lib\TGMTcs\src\TGMTimage.cs">
       <Link>TGMTcs\TGMTimage.cs</Link>
     </Compile>

@@ -1,4 +1,8 @@
-﻿using System;
+﻿//CÔNG TY TNHH GIẢI PHÁP THỊ GIÁC MÁY TÍNH
+//support@viscomsolution.com
+//0939.825.125
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -95,11 +99,29 @@ namespace TGMTcs
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public static void SetDoubleBuffer(DataGridView dgv, bool DoubleBuffered)
+        public static void SetDoubleBuffer(DataGridView dgv)
         {
             typeof(Control).InvokeMember("DoubleBuffered",
                 BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
-                null, dgv, new object[] { DoubleBuffered });
+                null, dgv, new object[] { true });
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public static void SetDoubleBuffer(ListView dgv)
+        {
+            typeof(Control).InvokeMember("DoubleBuffered",
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
+                null, dgv, new object[] { true });
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public static void SetDoubleBuffer(FlowLayoutPanel panel)
+        {
+            typeof(Control).InvokeMember("DoubleBuffered",
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
+                null, panel, new object[] { true });
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +140,11 @@ namespace TGMTcs
             string[] splitted = location.Split(',');
             if(splitted.Length == 4)
             {
-                form.Location = new System.Drawing.Point( int.Parse(splitted[0]), int.Parse(splitted[1]));
+                int x = int.Parse(splitted[0]);
+                int y = int.Parse(splitted[1]);
+                if(x <0 || y < 0)
+                    return;
+                form.Location = new System.Drawing.Point(x, y);
                 form.Width = int.Parse(splitted[2]);
                 form.Height = int.Parse(splitted[3]);
             }

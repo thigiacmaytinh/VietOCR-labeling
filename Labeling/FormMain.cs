@@ -55,6 +55,7 @@ namespace Labeling
         private void Form2_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false;
+            TGMTform.SetDoubleBuffer(panel1);
 
             g_folderImagePath = TGMTregistry.GetInstance().ReadString("txtFolderImage");
 
@@ -204,7 +205,7 @@ namespace Labeling
                 return;
             }
 
-
+            panel1.Controls.Clear();
 
             List<int> listNoTxt = new List<int>();
             int index = 0;
@@ -611,7 +612,9 @@ namespace Labeling
             {
                 cb_page.DropDownItems.Add(i.ToString());
             }
-            
+
+            if (m_currentPage > m_totalPage)
+                m_currentPage = m_totalPage;
 
             panel_paging.Text = String.Format("Page: {0}/{1}", m_currentPage, m_totalPage); 
 
